@@ -15,33 +15,34 @@ const isNumber = function (num) {
 };
 
 const asking = function () {
-  // title = prompt("Введите название проекта", "Веб-приложение");
-  // screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
-  screenPrice = prompt("Сколько будет стоить данная работа?");
-  while (!isNumber(screenPrice)) {
+  title = prompt("Введите название проекта", "Веб-приложение");
+  screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+
+  do {
     screenPrice = prompt("Сколько будет стоить данная работа?");
-  }
-  // adaptive = confirm("Нужен ли адаптив на сайте?");
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm("Нужен ли адаптив на сайте?");
 };
 
 const getAllServicePrices = function () {
-  let sum = 0;
-  let numb;
+  let sum, price1, price2, numb;
 
   for (let i = 0; i < 2; i++) {
+    numb = i + 1;
     if (i === 0) {
       service1 = prompt("Какой дополнительный тип услуги нужен?", "Введите услугу");
+      while (!isNumber(price1)) {
+        price1 = prompt("Сколько будет стоить услуга №" + numb + "?").trim();
+      }
     } else if (i === 1) {
       service2 = prompt("Какой дополнительный тип услуги нужен?", "Введите услугу");
+      while (!isNumber(price2)) {
+        price2 = prompt("Сколько будет стоить услуга №" + numb + "?").trim();
+      }
     }
-    numb = i + 1;
-    sum += prompt("Сколько будет стоить услуга №" + numb + "?");
-    // console.log("sum гыдЖ " + sum);
-    // while (!isNumber(sum)) {
-    //   sum += prompt("Сколько будет стоить услуга №" + numb + "?");
-    // }
   }
-  return sum;
+  return parseInt(price1) + parseInt(price2);
 };
 
 const getFullPrice = function () {
@@ -73,13 +74,13 @@ asking();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
-// title = getTitle(title);
+title = getTitle(title);
 
-// typeOf(title);
-// typeOf(fullPrice);
-// typeOf(adaptive);
+typeOf(title);
+typeOf(fullPrice);
+typeOf(adaptive);
 console.log(title);
-// console.log(screens);
+console.log(screens);
 console.log("Сумма всех дополнительных услуг " + allServicePrices + " рублей/долларов/гривен/юани");
 console.log("Стоимость разработки сайта " + fullPrice + " рублей/долларов/гривен/юани");
 console.log("Итоговая стоимость за вычетом отката " + servicePercentPrice + " рублей/долларов/гривен/юани");
