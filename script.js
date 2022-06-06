@@ -26,23 +26,25 @@ const asking = function () {
 };
 
 const getAllServicePrices = function () {
-  let sum, price1, price2, numb;
+  let sum = 0,
+    price,
+    numb;
 
   for (let i = 0; i < 2; i++) {
     numb = i + 1;
     if (i === 0) {
       service1 = prompt("Какой дополнительный тип услуги нужен?", "Введите услугу");
-      while (!isNumber(price1)) {
-        price1 = prompt("Сколько будет стоить услуга №" + numb + "?").trim();
-      }
     } else if (i === 1) {
       service2 = prompt("Какой дополнительный тип услуги нужен?", "Введите услугу");
-      while (!isNumber(price2)) {
-        price2 = prompt("Сколько будет стоить услуга №" + numb + "?").trim();
-      }
     }
+
+    do {
+      price = prompt("Сколько будет стоить услуга №" + numb + "?").trim();
+    } while (!isNumber(price));
+
+    sum += +price;
   }
-  return parseInt(price1) + parseInt(price2);
+  return sum;
 };
 
 const getFullPrice = function () {
