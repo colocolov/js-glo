@@ -5,6 +5,7 @@ const books = document.querySelector(".books");
 const book = document.querySelectorAll(".book");
 const head = document.querySelectorAll("a");
 const adv = document.querySelector(".adv");
+const chapter = document.createElement("li");
 
 // 1
 books.append(book[1]);
@@ -35,8 +36,7 @@ list5[9].after(list5[3]);
 list5[3].after(list5[4]);
 list5[7].after(list5[5]);
 
-//6
-book[2].append("---");
+// 6
 let list6 = book[2].querySelectorAll("li");
-// list.before(list[6]);
-// console.log(list);
+chapter.textContent = "Глава 8: За пределами ES6";
+list6[8].after(chapter);
