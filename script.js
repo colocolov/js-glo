@@ -1,122 +1,42 @@
 "use strict";
 
-const appData = {
-  title: "",
-  screens: [],
-  screenPrice: 0,
-  adaptive: true,
-  services: [],
-  allServicePrices: 0,
-  fullPrice: 0,
-  servicePercentPrice: 0,
-  rollback: Math.ceil(Math.random() * 10),
+const body = document.body;
+const books = document.querySelector(".books");
+const book = document.querySelectorAll(".book");
+const head = document.querySelectorAll("a");
+const adv = document.querySelector(".adv");
 
-  start: function () {
-    appData.asking();
-    appData.getPrices();
-    appData.getFullPrice();
-    appData.getServicePercentPrices();
-    appData.getTitle(appData.title);
-    appData.logger();
-  },
+// 1
+books.append(book[1]);
+books.append(book[0]);
+books.append(book[4]);
+books.append(book[3]);
+books.append(book[5]);
+books.append(book[2]);
 
-  asking: function () {
-    do {
-      appData.title = prompt("Введите название проекта", "Веб-приложение").trim();
-    } while (appData.isNumber(appData.title));
+// 2
+body.style.backgroundImage = "url('image/you-dont-know-js.jpg')";
 
-    for (let i = 0; i < 2; i++) {
-      let name;
-      let price = 0;
-      do {
-        name = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
-      } while (appData.isNumber(name));
+//3
+head[4].innerHTML = "Книга 3. this и Прототипы Объектов";
 
-      do {
-        price = +prompt("Сколько будет стоить данная работа?").trim();
-      } while (!appData.isNumber(price));
+// 4
+adv.remove();
 
-      appData.screens.push({ id: i, name: name, price: price });
-    }
+// 5
+let list2 = book[0].querySelectorAll("li");
+list2[3].after(list2[6]);
+list2[6].after(list2[8]);
+list2[9].after(list2[2]);
 
-    for (let i = 0; i < 2; i++) {
-      let name;
-      let price = 0;
-      let numb = i + 1;
+let list5 = book[5].querySelectorAll("li");
+list5[1].after(list5[9]);
+list5[9].after(list5[3]);
+list5[3].after(list5[4]);
+list5[7].after(list5[5]);
 
-      do {
-        name = prompt("Какой дополнительный тип услуги нужен?", "Введите услугу");
-      } while (appData.isNumber(name));
-
-      do {
-        price = +prompt("Сколько будет стоить услуга №" + numb + "?").trim();
-      } while (!appData.isNumber(price));
-
-      appData.services.push({ id: i, name: name, price: price });
-    }
-
-    appData.adaptive = confirm("Нужен ли адаптив на сайте?");
-  },
-
-  isNumber: function (num) {
-    return !isNaN(parseFloat(num)) && isFinite(num);
-  },
-
-  typeOf: function (variable) {
-    console.log(variable, typeof variable);
-  },
-
-  getPrices: function () {
-    appData.screenPrice = appData.screens.reduce(function (sum, item) {
-      return sum + item.price;
-    }, 0);
-    // for (let screen of appData.screens) {
-    //   appData.screenPrice += +screen.price;
-    // }
-
-    for (let price of appData.services) {
-      appData.allServicePrices += price.price;
-    }
-  },
-
-  getFullPrice: function () {
-    appData.fullPrice = parseInt(appData.screenPrice) + appData.allServicePrices;
-  },
-
-  getTitle: function () {
-    let titleNew = appData.title.trim().toLowerCase();
-    appData.title = titleNew.charAt(0).toUpperCase() + titleNew.slice(1);
-  },
-
-  getServicePercentPrices: function () {
-    appData.servicePercentPrice = appData.fullPrice - (appData.rollback / 100) * appData.fullPrice;
-  },
-
-  getRollbackMessage: function (price) {
-    if (price >= 30000) {
-      return "Даем скидку в 10%";
-    } else if (price >= 15000 && price < 30000) {
-      return "Даем скидку в 5%";
-    } else if (price >= 0 && price < 15000) {
-      return "Скидка не предусмотрена";
-    } else {
-      return "Что то пошло не так";
-    }
-  },
-
-  logger: function () {
-    console.log(appData.title);
-    console.log(appData.screens);
-    console.log("Сумма всех дополнительных услуг " + appData.allServicePrices + " рублей");
-    console.log("Стоимость разработки сайта " + appData.fullPrice + " рублей");
-    console.log("Итоговая стоимость за вычетом отката " + appData.servicePercentPrice + " рублей");
-    console.log(appData.getRollbackMessage(appData.fullPrice));
-    // console.log("---");
-
-    for (let key in appData) {
-      // console.log("Ключ: " + key + " Значение: " + appData[key]);
-    }
-  },
-};
-
-appData.start();
+//6
+book[2].append("---");
+let list6 = book[2].querySelectorAll("li");
+// list.before(list[6]);
+// console.log(list);
