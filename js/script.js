@@ -36,6 +36,7 @@ const appData = {
     appData.addTitle();
     btnCalc.addEventListener("click", appData.start);
     btnPlus.addEventListener("click", appData.addScreenBlock);
+    range.addEventListener("click", this.getRollback());
   },
 
   addTitle: function () {
@@ -64,13 +65,29 @@ const appData = {
       const input = screen.querySelector("input");
       const selectName = select.options[select.selectedIndex].textContent;
 
+      // while (+input.value <= 0) {
+      //   alert("Введите кол-во экранов!");
+      //   break;
+      //   //   continue;
+      // }
+      // else {
+      // console.log(">" + input.value);
       appData.screens.push({
         id: index,
         name: selectName,
         price: +select.value * +input.value,
       });
+
+      // console.log(typeof input);
     });
-    console.log(appData.screens);
+
+    for (let price of appData.screens) {
+      // appData.servicePricesNumber += appData.servicesNumber[price];
+      // console.log("--");
+      // console.log(price.price);
+      // console.log("**");
+    }
+    // console.log(appData.screens);
   },
 
   addScreenBlock: function () {
@@ -127,6 +144,10 @@ const appData = {
     total.value = appData.screenPrice;
     totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
     fullTotalCount.value = appData.fullPrice;
+  },
+
+  getRollback: function () {
+    rangeValue.textContent = range.value + " %";
   },
 
   getRollbackMessage: function (price) {
