@@ -34,10 +34,10 @@ const appData = {
   adaptive: true,
 
   init: function () {
-    appData.addTitle();
-    btnCalc.addEventListener("click", appData.start);
-    btnPlus.addEventListener("click", appData.addScreenBlock);
-    appData.getRollback();
+    this.addTitle();
+    btnCalc.addEventListener("click", this.start);
+    btnPlus.addEventListener("click", this.addScreenBlock);
+    this.getRollback();
   },
 
   addTitle: function () {
@@ -45,29 +45,29 @@ const appData = {
   },
 
   start: function () {
-    appData.addScreens();
-    appData.addServices();
-    appData.getPrices();
-    appData.showResult();
+    this.addScreens();
+    this.addServices();
+    this.getPrices();
+    this.showResult();
     // appData.logger();
-    console.log(appData);
+    // console.log(appData);
   },
 
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
 
-    screens.forEach(function (screen, index) {
+    screens.forEach((screen, index) => {
       const select = screen.querySelector("select");
       const input = screen.querySelector("input");
       const selectName = select.options[select.selectedIndex].textContent;
-      appData.countScreens += +input.value;
+      this.countScreens += +input.value;
 
       if (select.value == "" || input.value == "") {
         alert("Выберите Тип экрана и введие их кол-во!");
         // console.log("err");
         return;
       } else {
-        appData.screens.push({
+        this.screens.push({
           id: index,
           name: selectName,
           price: +select.value * +input.value,
@@ -82,7 +82,7 @@ const appData = {
   },
 
   addServices: function () {
-    otherServicesPercent.forEach(function (item) {
+    otherServicesPercent.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
       const label = item.querySelector("label");
       const input = item.querySelector("input[type=text]");
@@ -92,7 +92,7 @@ const appData = {
       }
     });
 
-    otherServicesNumber.forEach(function (item) {
+    otherServicesNumber.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
       const label = item.querySelector("label");
       const input = item.querySelector("input[type=text]");
@@ -104,7 +104,7 @@ const appData = {
   },
 
   getPrices: function () {
-    appData.screenPrice = appData.screens.reduce(function (sum, item) {
+    appData.screenPrice = appData.screens.reduce((sum, item) => {
       return sum + item.price;
     }, 0);
 
@@ -129,13 +129,12 @@ const appData = {
   },
 
   getRollback: function () {
+    // СТРЕЛКА ??
     range.addEventListener("input", function () {
       rangeValue.textContent = range.value + "%";
       appData.rollback = range.value;
-      /* начало усложненного */
       appData.servicePercentPrice = appData.fullPrice - (appData.rollback / 100) * appData.fullPrice;
       totalCountRollback.value = appData.servicePercentPrice;
-      /* конец усложненного */
     });
   },
 
